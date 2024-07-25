@@ -49,6 +49,11 @@ public class Employee {
         str += "<span>" + Math.round(monthlySalary * 12) + "</span>";
         if (manager != null) str += "<span>" + manager + "</span>";
         else str += "<span>None</span>";
+        str += "<span>" + getTotalLeaveLeftPreviously() + "</span>";
+        return str + "</div> </div>";
+    }
+
+    public int getTotalLeaveLeftPreviously() {
         int years = 3;
         if (yearsInOrg < 3) {
             years = yearsInOrg;
@@ -57,8 +62,7 @@ public class Employee {
         for (int i = 0; i < years; i++) {
             totalLeaveLeftPreviously += leavesLeftPreviously[yearsInOrg-i-1];
         }
-        str += "<span>" + totalLeaveLeftPreviously + "</span>";
-        return str + "</div> </div>";
+        return totalLeaveLeftPreviously;
     }
     //other method related to customer
 }

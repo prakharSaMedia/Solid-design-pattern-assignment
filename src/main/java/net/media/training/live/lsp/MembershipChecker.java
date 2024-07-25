@@ -21,10 +21,11 @@ public class MembershipChecker {
     }
 
     public static void main(String[] args) {
-        List elements = new ArrayList() {{
+        List<String> elements = new ArrayList() {{
             add("a");
             add("b");
             add("c");
+
         }};
 
         Set<String> uniqueElements = new PersistentSet<String>();
@@ -34,7 +35,7 @@ public class MembershipChecker {
 
         System.out.println("Check1: " + MembershipChecker.check(elements, uniqueElements));
 
-        List anotherElements = new ArrayList() {{
+        List<String> anotherElements = new ArrayList() {{
             add("a");
             add("c");
             add("d");

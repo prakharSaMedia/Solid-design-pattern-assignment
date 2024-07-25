@@ -16,22 +16,12 @@ import java.util.Base64;
  */
 public class EncodingModule {
     public void encodeWithFiles() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/skyywalker/Downloads/SolidLiveAsignment-master/src/main/java/net/media/training/live/dip/afterEncryption.txt"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/skyywalker/Downloads/SolidLiveAsignment-master/src/main/java/net/media/training/live/dip/afterEncryption.txt"));
-            String aLine;
-            while ((aLine = reader.readLine()) != null) {
-                String encodedLine = Base64.getEncoder().encodeToString(aLine.getBytes());
-                writer.write(encodedLine);
-            }
-            writer.flush();
-            writer.close();
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Reader reader = new Reader();
+        Writer writer = new Writer();
+        String readFilePath = "/Users/skyywalker/Downloads/SolidLiveAsignment-master/src/main/java/net/media/training/live/dip/afterEncryption.txt";
+        String writeFilePath = "/Users/skyywalker/Downloads/SolidLiveAsignment-master/src/main/java/net/media/training/live/dip/afterEncryption.txt";
+        String content = reader.readFromFile(readFilePath);
+        writer.writeToFile(writeFilePath, content);
     }
 
     public void encodeBasedOnNetworkAndDatabase() {
@@ -41,28 +31,11 @@ public class EncodingModule {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        InputStream in = null;
-        try {
-            in = url.openStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        InputStreamReader reader = new InputStreamReader(in);
-        StringBuilder inputString1 = new StringBuilder();
-        try {
-            int c;
-            c = reader.read();
-            while (c != -1) {
-                inputString1.append((char) c);
-                c = reader.read();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String inputString = inputString1.toString();
-        String encodedString = Base64.getEncoder().encodeToString(inputString.getBytes());
-        MyDatabase database = new MyDatabase();
-        database.write(encodedString);
+        Reader reader = new Reader();
+        Writer writer = new Writer();
+        String content = reader.readFromDatabase(url);
+        String encodedString = Base64.getEncoder().encodeToString(content.getBytes());
+        writer.writeToDatabase(encodedString);
     }
 }
 
